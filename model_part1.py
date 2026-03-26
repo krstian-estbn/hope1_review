@@ -88,8 +88,9 @@ class Farm:
         
         for r, c in cells:
             if self.grid[r][c] is not None:
-                crop: Crop = self.grid[r][c]
-                crop.water()
+                crop: Crop | None = self.grid[r][c]
+                if crop:
+                    crop.water()
         
         return True
     
