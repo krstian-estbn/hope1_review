@@ -1,30 +1,31 @@
 import argparse
 from controller import Controller
 from view import View
-from model_part1 import AnimalCrossing, PVZ, BasicCan, SteelCan
-
+from model_part1 import AnimalCrossing, PVZ, BasicCan, SteelCan, Seed, WateringCan
+from model_part2 import StardewValley, KoyukiAndCans, WaterBucket
+from typing import Callable
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", required=True)
     parser.add_argument("--water", required=True)
     
     args = parser.parse_args()
+    mode_mapping: dict[str, Callable[[], Seed]] = {
+        "ac": AnimalCrossing,
+        "pvz": PVZ,
+        "svd": StardewValley
+    }
     
-    if args.mode == "ac":
-        mode = AnimalCrossing()
-    elif args.mode == "pvz":
-        mode = PVZ()
-    else:
-        print("Invalid mode")
-        return
+    watering_can_mapping: dict[str, Callable[[], WateringCan]] = {
+        "basic": BasicCan,
+        "steel": SteelCan,
+        "koyuki": KoyukiAndCans,
+        "bucket": WaterBucket
+    }
     
-    if args.water == "basic":
-        watering_can = BasicCan()
-    elif args.water == "steel":
-        watering_can = SteelCan()
-    else:
-        print("Invalid watering can")
-        return
+    mode = mode_mapping[args.mode]()
+    watering_can = watering_can_mapping[args.water]()
+    
     view = View()
     game = Controller(view, mode, watering_can)
     game.run()
