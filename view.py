@@ -1,9 +1,12 @@
 from model_part1 import *
 from typing import Literal, Mapping, Callable
 class View:
-    def print_grid(self, farm: Farm, player: Player):
+    def print_start(self, farm: Farm, player: Player):
         print("====\n")
         print(f"Day {player.day}")
+        self.print_grid(farm, player)
+
+    def print_grid(self, farm: Farm, player: Player):
         print(f"Pesos: {player.pesos}")
         
         for row in farm.grid:
@@ -36,8 +39,8 @@ class View:
         return (i, j)
     
     def success(self):
-        print("Success!")
+        print("Success!\n")
     
     def failed(self):
-        print("Failed.")
+        print("Failed.\n")
         

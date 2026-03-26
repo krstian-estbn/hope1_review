@@ -14,7 +14,7 @@ class Controller:
         self.crops = self.mode.get_crop()
     
     def run(self):
-        self.view.print_grid(self.farm, self.player)
+        self.view.print_start(self.farm, self.player)
         
         while True:
             action: str = self.view.ask_for_action()
@@ -29,6 +29,9 @@ class Controller:
                 self.next_day_action()
             elif action == "g":
                 self.view.print_grid(self.farm, self.player)
+            else:
+                continue
+                
 
     def plant_action(self):
         crop_name = self.view.ask_for_crop(self.crops)
@@ -65,4 +68,4 @@ class Controller:
     def next_day_action(self):
         self.farm.next_day(self.player)
         print("Day ended.")
-        self.view.print_grid(self.farm, self.player)
+        self.view.print_start(self.farm, self.player)
