@@ -67,5 +67,5 @@ class Controller:
     
     def next_day_action(self):
         self.farm.next_day(self.player)
-        print("Day ended.")
+        print("Day ended.\n")
         self.view.print_start(self.farm, self.player)

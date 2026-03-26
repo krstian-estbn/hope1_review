@@ -1,7 +1,6 @@
 from typing import Callable
-
 from model_part1 import *
-from rev.model_part1 import Crop
+
 class Parsnip(Crop):
     def __init__(self):
         super().__init__(100, 1, 200, "p", "P")
